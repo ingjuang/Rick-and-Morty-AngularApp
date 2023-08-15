@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div>
+      <input nbInput type="text" [(ngModel)]="filter" (ngModelChange)="getDataByFind()" placeholder="Buscar">
+    </div>
+    <div class="col-xs-12 col-md-4 col-lg-3" *ngFor="let item of $apiResults">
+      <div class="card">
+        <img class="card-img-top" *ngIf="item.image" [src]="item.image" alt="Card image cap" />
+        <div class="card-block">
+          <h4 class="card-title">{{ item.name }}</h4>
+          <p class="card-text dimension" *ngIf="item.dimension">Dimensión {{item.dimension}}</p>
+          <p class="card-text created"  *ngIf="item.type">Tipo: {{item.type}}</p>
+          <p class="card-text created"  *ngIf="item.status">Estado: {{item.status}}</p>
+          <p class="card-text created"  *ngIf="item.created">Creado: {{item.created |date:"dd-MM-yyyy"}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+    <ul class="pagination justify-content-center" *ngIf="!filtering">
+        <li class="page-item" *ngIf="$apiResponse?.info.prev">
+          <a class="page-link" (click)="getDataPagination($apiResponse?.info.prev)" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item" *ngIf="$apiResponse?.info.next">
+          <a class="page-link" (click)="getDataPagination($apiResponse?.info.next)">Next</a>
+        </li>
+      </ul>
+</div>
